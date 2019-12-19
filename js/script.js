@@ -1,16 +1,13 @@
 function buildColorDropdown(theme) {
-    // cornflowerblue - Cornflower Blue (JS Puns shirt only
-    // darkslategrey - Dark Slate Grey (JS Puns shirt only)
-    // gold - Gold (JS Puns shirt only)
-    // tomato - Tomato (I &#9829; JS shirt only
-    // steelblue - Steel Blue (I &#9829; JS shirt only)
-    // dimgrey - Dim Grey (I &#9829; JS shirt only)
-    var colors = null;
+    var colors = null
+    var descriptions = null
 
     if (theme == "js puns"){
         colors = ["cornflowerblue", "darkslategrey", "gold"]
+        descriptions = ["Cornflower Blue (JS Puns shirt only)", "Dark Slate Grey (JS Puns shirt only)", "Gold (JS Puns shirt only)"]
     } else if (theme == "heart js"){
         colors = ["tomato", "steelblue", "dimgrey"]
+        descriptions = ["Tomato (I &#9829; JS shirt only)", "Steel Blue (I &#9829; JS shirt only)", "Dim Grey (I &#9829; JS shirt only)"]
     } else {
         console.log("I don't know this theme:", theme)
     }
@@ -19,7 +16,7 @@ function buildColorDropdown(theme) {
     var dropdownOptions = "";
 
     for (var i = 0; i < colors.length; i++){
-        dropdownOptions += "<option value=" + colors[i] + ">" + colors[i] + "</option>\n"
+        dropdownOptions += "<option value=" + colors[i] + ">" + descriptions[i] + "</option>\n"
     }
 
     return "<select id='color'>" + dropdownOptions + "</select>"
