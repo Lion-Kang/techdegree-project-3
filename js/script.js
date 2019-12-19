@@ -1,3 +1,30 @@
+function buildColorDropdown(theme) {
+    // cornflowerblue - Cornflower Blue (JS Puns shirt only
+    // darkslategrey - Dark Slate Grey (JS Puns shirt only)
+    // gold - Gold (JS Puns shirt only)
+    // tomato - Tomato (I &#9829; JS shirt only
+    // steelblue - Steel Blue (I &#9829; JS shirt only)
+    // dimgrey - Dim Grey (I &#9829; JS shirt only)
+    var colors = null;
+
+    if (theme == "js puns"){
+        colors = ["cornflowerblue", "darkslategrey", "gold"]
+    } else if (theme == "heart js"){
+        colors = ["tomato", "steelblue", "dimgrey"]
+    } else {
+        console.log("I don't know this theme:", theme)
+    }
+
+    // do stuff with colors
+    var dropdownOptions = "";
+
+    for (var i = 0; i < colors.length; i++){
+        dropdownOptions += "<option value=" + colors[i] + ">" + colors[i] + "</option>\n"
+    }
+
+    return "<select id='color'>" + dropdownOptions + "</select>"
+}
+
 // Select first input field on page load
 $("#name").focus();
 
@@ -14,7 +41,7 @@ $("#title").change(function(){
 });
 
 // Hide "Select Theme" option from drop menu
-$("#design").children().first().remove();
+$("#design").children().first().hide();
 
 // Prepend instruction to beginning of 'color' select tag
 $("#color").prepend("<option>Please select a T-Shirt Theme</option>");
@@ -24,9 +51,9 @@ $("#color").val('Please select a T-Shirt Theme');
 
 // show colors for only "Theme - JS Puns"
 $("#design").change(function(){
-    if($("#design option:selected").val() == "js puns"){
-        $("#colors-js-puns").show();
-    } else {
-        $("#colors-js-puns").hide();
-    }
+    var theme = $("#design option:selected").val();
+    var colorDropdown = buildColorDropdown(theme);
+    $("#color").replaceWith(colorDropdown);
+
+    
 }); 
