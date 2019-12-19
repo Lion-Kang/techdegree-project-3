@@ -41,7 +41,7 @@ a {
 form {
 	padding: .875em 1.875em 1.875em;
 	background: #9BBEEF;
-	border: 2px solid rgba(8, 63, 87, 0.7);
+	border: 2px solid rgba(8, 63, 87, 0.6);
 	border-radius: 3px;
 }
 
@@ -90,7 +90,7 @@ input {
 	font-weight: 500;
 	padding: .8em;
 	background: #e9f6fb;
-	border: 2px solid #6F9DDC;
+	border: 2px solid rgb(111, 157, 220);
 	border-radius: 3px;
 	outline: none;
 }
@@ -141,12 +141,29 @@ option {
 	margin-right: .85em;
 }
 
+.shirt-box {
+	width: 100%;
+	padding: 5px;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 4px;
+}
+
 .interests input {
 	margin-bottom: 0;
 }
 
 .credit-card {
 	margin-top: 1.25em;
+}
+
+.credit-card,
+.paypal,
+.bitcoin {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 5px;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 4px;
 }
 
 /* ================================= 
