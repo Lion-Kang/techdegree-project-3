@@ -54,3 +54,18 @@ $("#design").change(function(){
 
     
 }); 
+
+var totalActivityCost = 0;
+$(".activities").append("<p id='total-activity-cost'>Total:","$" + totalActivityCost,"</p>");
+console.log("total activity cost =", totalActivityCost);
+
+$("input").change(function(){
+    if ($("input:checkbox").is(":checked")) {
+        dataCost = $(this).attr('data-cost');
+        console.log(dataCost);
+        // add dataCost to totalActivityCost
+    } else if ($("input:checkbox").prop("checked",false)) {
+        //subtract dataCost from totalActivityCost
+        console.log("unchecked");
+    }
+});
