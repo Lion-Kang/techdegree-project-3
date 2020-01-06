@@ -56,24 +56,26 @@ $("#design").change(function(){
 }); 
 
 var totalActivityCost = 0;
-$(".activities").append("<p id='total-activity-cost'>Total:","$" + totalActivityCost,"</p>");
+$(".activities").append("<p id='total-activity-cost'>Total: $0","</p>");
 // console.log("total activity cost =", totalActivityCost);
 
 $(".activities input").click(function(){ 
     if ($(this).is(":checked")) {
         dataCost = $(this).attr('data-cost');
-        console.log(dataCost);
+        //console.log(dataCost);
         dataCost = parseInt(dataCost);
         
         // add dataCost to totalActivityCost
         totalActivityCost += dataCost;
-        console.log("checked data cost =",dataCost, "total =",totalActivityCost);
+        //console.log("checked data cost =",dataCost, "total =",totalActivityCost);
+        $("#total-activity-cost").text("Total: $" + totalActivityCost);
 
     } else if ($(this).is(":not(:checked)")) {  
         dataCost = $(this).attr('data-cost');
 
         //subtract dataCost from totalActivityCost
         totalActivityCost -= dataCost; 
-        console.log("unchecked data cost =",dataCost, "total =",totalActivityCost);
+        //console.log("unchecked data cost =",dataCost, "total =",totalActivityCost);
+        $("#total-activity-cost").text("Total: $" + totalActivityCost);
     };
 });
