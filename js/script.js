@@ -59,7 +59,7 @@ var totalActivityCost = 0;
 $(".activities").append("<p id='total-activity-cost'>Total: $0","</p>");
 // console.log("total activity cost =", totalActivityCost);
 
-$(".activities input").click(function(){ 
+$(".activities input").change(function(){ 
     if ($(this).is(":checked")) {
         dataCost = $(this).attr('data-cost');
         //console.log(dataCost);
@@ -70,6 +70,14 @@ $(".activities input").click(function(){
         //console.log("checked data cost =",dataCost, "total =",totalActivityCost);
         $("#total-activity-cost").text("Total: $" + totalActivityCost);
 
+        $(".activities input").each(function(index){
+            //console.log(index + ": " + $(this).attr('data-day-and-time') );
+            if ( ($("input:checked").attr('data-day-and-time')) == (($(this)).attr('data-day-and-time')) ) {
+                $(this).prop("disabled", true);
+                $("input:checked").prop("disabled",false);
+            }
+        });
+        
     } else if ($(this).is(":not(:checked)")) {  
         dataCost = $(this).attr('data-cost');
 
@@ -77,5 +85,11 @@ $(".activities input").click(function(){
         totalActivityCost -= dataCost; 
         //console.log("unchecked data cost =",dataCost, "total =",totalActivityCost);
         $("#total-activity-cost").text("Total: $" + totalActivityCost);
+
+        $(".activities input").each(function(index){
+            if ( ($("input:not(:checked)").attr('data-day-and-time')) == (($("input:checked")).attr('data-day-and-time')) ) {
+                $(this).prop("disabled", false);
+            }
+        });
     };
 });
