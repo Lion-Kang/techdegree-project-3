@@ -59,37 +59,25 @@ var totalActivityCost = 0;
 $(".activities").append("<p id='total-activity-cost'>Total: $0","</p>");
 // console.log("total activity cost =", totalActivityCost);
 
+function updateActivityBoxesWhenChecked(checkboxChanged) {
+    let checkedDateAndTime = $(checkboxChanged).attr('data-day-and-time');
+    let $allActivitiesWithSameDateAndTime = $(".activities input[data-day-and-time='"+ checkedDateAndTime + "']");
+    $allActivitiesWithSameDateAndTime.prop("disabled", true);
+    $(checkboxChanged).prop("disabled", false);
+}
+
 $(".activities input").change(function(){
     let changedCheckbox = this; 
     if ($(changedCheckbox).is(":checked")) {
         dataCost = $(changedCheckbox).attr('data-cost');
-        //console.log(dataCost);
         dataCost = parseInt(dataCost);
-        
-        // add dataCost to totalActivityCost
         totalActivityCost += dataCost;
-        //console.log("checked data cost =",dataCost, "total =",totalActivityCost);
-        $("#total-activity-cost").text("Total: $" + totalActivityCost);
-        let checkedDateAndTime = $(changedCheckbox).attr('data-day-and-time');
-        
-        let $allCheckedActivitiesWithSameDateAndTime = $(".activities input[data-day-and-time='"+ checkedDateAndTime + "']");
-        console.log($allCheckedActivitiesWithSameDateAndTime)
-
-        $allCheckedActivitiesWithSameDateAndTime.prop("disabled", true);
-        $(changedCheckbox).prop("disabled", false);
-    } else if ($(changedCheckbox).is(":not(:checked)")) {  
-        dataCost = $(changedCheckbox).attr('data-cost');
-
-        //subtract dataCost from totalActivityCost
-        totalActivityCost -= dataCost; 
-        //console.log("unchecked data cost =",dataCost, "total =",totalActivityCost);
         $("#total-activity-cost").text("Total: $" + totalActivityCost);
 
-        $(".activities input").each(function(index){
-            let aCheckbox = this;
-            if ( ($("input:not(:checked)").attr('data-day-and-time')) == (($("input:checked")).attr('data-day-and-time')) ) {
-                $(aCheckbox).prop("disabled", false);
-            }
-        });
-    };
+        updateActivityBoxesWhenChecked(changedCheckbox);
+    } else {
+        let uncheckedDateAndTime = $(changedCheckbox).attr('data-day-and-time');
+        let $allActivitiesWithSameDateAndTime = $(".activities input[data-day-and-time='"+ uncheckedDateAndTime + "']");
+        $allActivitiesWithSameDateAndTime.prop("disabled", false);
+    }
 });
