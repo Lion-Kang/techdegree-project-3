@@ -55,6 +55,8 @@ $("#design").change(function(){
     
 }); 
 
+// ----------------------- UNDERSTAND BELOW THIS LINE ----------------------------------
+
 var totalActivityCost = 0;
 $(".activities").append("<p id='total-activity-cost'>Total: $0","</p>");
 // console.log("total activity cost =", totalActivityCost);
@@ -79,5 +81,10 @@ $(".activities input").change(function(){
         let uncheckedDateAndTime = $(changedCheckbox).attr('data-day-and-time');
         let $allActivitiesWithSameDateAndTime = $(".activities input[data-day-and-time='"+ uncheckedDateAndTime + "']");
         $allActivitiesWithSameDateAndTime.prop("disabled", false);
+
+        dataCost = $(changedCheckbox).attr('data-cost');
+        dataCost = parseInt(dataCost);
+        totalActivityCost -= dataCost;
+        $("#total-activity-cost").text("Total: $" + totalActivityCost);
     }
 });
