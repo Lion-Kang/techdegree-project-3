@@ -59,9 +59,10 @@ var totalActivityCost = 0;
 $(".activities").append("<p id='total-activity-cost'>Total: $0","</p>");
 // console.log("total activity cost =", totalActivityCost);
 
-$(".activities input").change(function(){ 
-    if ($(this).is(":checked")) {
-        dataCost = $(this).attr('data-cost');
+$(".activities input").change(function(){
+    let changedCheckbox = this; 
+    if ($(changedCheckbox).is(":checked")) {
+        dataCost = $(changedCheckbox).attr('data-cost');
         //console.log(dataCost);
         dataCost = parseInt(dataCost);
         
@@ -69,17 +70,15 @@ $(".activities input").change(function(){
         totalActivityCost += dataCost;
         //console.log("checked data cost =",dataCost, "total =",totalActivityCost);
         $("#total-activity-cost").text("Total: $" + totalActivityCost);
-
-        $(".activities input").each(function(index){
-            //console.log(index + ": " + $(this).attr('data-day-and-time') );
-            if ( ($("input:checked").attr('data-day-and-time')) == (($(this)).attr('data-day-and-time')) ) {
-                $(this).prop("disabled", true);
-                $("input:checked").prop("disabled",false);
-            }
-        });
+        let checkedDateAndTime = $(changedCheckbox).attr('data-day-and-time');
         
-    } else if ($(this).is(":not(:checked)")) {  
-        dataCost = $(this).attr('data-cost');
+        let $allCheckedActivitiesWithSameDateAndTime = $(".activities input[data-day-and-time='"+ checkedDateAndTime + "']");
+        console.log($allCheckedActivitiesWithSameDateAndTime)
+
+        $allCheckedActivitiesWithSameDateAndTime.prop("disabled", true);
+        $(changedCheckbox).prop("disabled", false);
+    } else if ($(changedCheckbox).is(":not(:checked)")) {  
+        dataCost = $(changedCheckbox).attr('data-cost');
 
         //subtract dataCost from totalActivityCost
         totalActivityCost -= dataCost; 
@@ -87,8 +86,9 @@ $(".activities input").change(function(){
         $("#total-activity-cost").text("Total: $" + totalActivityCost);
 
         $(".activities input").each(function(index){
+            let aCheckbox = this;
             if ( ($("input:not(:checked)").attr('data-day-and-time')) == (($("input:checked")).attr('data-day-and-time')) ) {
-                $(this).prop("disabled", false);
+                $(aCheckbox).prop("disabled", false);
             }
         });
     };
